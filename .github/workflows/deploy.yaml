@@ -16,7 +16,21 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
      
-
+    - name: Create ebsrole.json file
+      run: |
+          echo '{
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": "elasticbeanstalk.amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          }' > ebsrole.json
+          
     - name: Create EBS Role
       run: |
         aws iam create-role --role-name EBSrole --assume-role-policy-document file://ebsrole.json
