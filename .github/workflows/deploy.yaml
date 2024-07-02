@@ -37,14 +37,16 @@ jobs:
       
     - name: wait for role creation
       run: sleep 6 
-
+      
     - name: Create ebspolicy.json file
       run: |
         echo '{
           "Version": "2012-10-17",
           "Statement": [
             {
-              "elasticloadbalancing:DescribeInstanceHealth",
+              "Effect": "Allow",
+              "Action": [
+                "elasticloadbalancing:DescribeInstanceHealth",
                 "elasticloadbalancing:DescribeLoadBalancers",
                 "elasticloadbalancing:DescribeTargetHealth",
                 "ec2:DescribeInstances",
@@ -64,16 +66,17 @@ jobs:
               "Resource": "*"
             },
             {
-            "Effect": "Allow",
-            "Action": [
+              "Effect": "Allow",
+              "Action": [
                 "logs:DescribeLogStreams",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
-            ],
-            "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
-        }
+              ],
+              "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
+            }
           ]
         }' > ebspolicy.json
+    
     
       
         
