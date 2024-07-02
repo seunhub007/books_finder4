@@ -33,7 +33,7 @@ jobs:
 
     - name: Create EBS Role
       run: |
-        aws iam create-role --role-name EBSrole --assume-role-policy-document file://ebsrole.json
+        aws iam create-role --role-name EBSrole1 --assume-role-policy-document file://ebsrole.json
       
     - name: wait for role creation
       run: sleep 6 
@@ -81,7 +81,7 @@ jobs:
         
     - name: "Create policy"
       run: |
-        aws iam create-policy --policy-name ebspolicy --policy-document file://ebspolicy.json
+        aws iam create-policy --policy-name ebspolicy1 --policy-document file://ebspolicy.json
         # aws iam create-policy --policy-name ebspolicy2 --policy-document file://ebs2policy.json
   
     - name: wait for policy creation
@@ -90,7 +90,7 @@ jobs:
   
     - name: Attach policy to role
       run: |
-        aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy
+        aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy1
         # aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
     - name: wait for policy attachment
       run: sleep 10
