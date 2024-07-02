@@ -30,18 +30,57 @@ jobs:
               }
             ]
           }' > ebsrole.json
-          
+
     - name: Create EBS Role
       run: |
         aws iam create-role --role-name EBSrole --assume-role-policy-document file://ebsrole.json
       
     - name: wait for role creation
       run: sleep 6 
+
+    - name: Create ebspolicy.json file
+      run: |
+        echo '{
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "elasticloadbalancing:DescribeInstanceHealth",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:DescribeTargetHealth",
+                "ec2:DescribeInstances",
+                "ec2:DescribeInstanceStatus",
+                "ec2:GetConsoleOutput",
+                "ec2:AssociateAddress",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeSecurityGroups",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeScalingActivities",
+                "autoscaling:DescribeNotificationConfigurations",
+                "sns:Publish"
+              ],
+              "Resource": "*"
+            },
+            {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
+        }
+          ]
+        }' > ebspolicy.json
+    
+      
         
     - name: "Create policy"
       run: |
         aws iam create-policy --policy-name ebspolicy --policy-document file://ebspolicy.json
-        aws iam create-policy --policy-name ebspolicy2 --policy-document file://ebs2policy.json
+        # aws iam create-policy --policy-name ebspolicy2 --policy-document file://ebs2policy.json
   
     - name: wait for policy creation
       run: sleep 8
@@ -50,7 +89,7 @@ jobs:
     - name: Attach policy to role
       run: |
         aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy
-        aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
+        # aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
     - name: wait for policy attachment
       run: sleep 10
           
