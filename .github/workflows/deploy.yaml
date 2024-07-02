@@ -14,7 +14,34 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1    
+        aws-region: us-east-1
+    
+    - name: Checkout
+      uses: actions/checkout@v4   
+
+    - name: Create EBS Role
+      run: |
+        aws iam create-role --role-name EBSrole --assume-role-policy-document file://ebsrole.json
+      
+    - name: wait for role creation
+      run: sleep 6 
+        
+    - name: "Create policy"
+      run: |
+        aws iam create-policy --policy-name ebspolicy --policy-document file://ebspolicy.json
+        aws iam create-policy --policy-name ebspolicy2 --policy-document file://ebs2policy.json
+  
+    - name: wait for policy creation
+      run: sleep 8
+        
+  
+    - name: Attach policy to role
+      run: |
+        aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy
+        aws iam attach-role-policy --role-name ebsrole --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
+    - name: wait for policy attachment
+      run: sleep 10
+          
 
     - name: Checkout source code
       uses: actions/checkout@v2
