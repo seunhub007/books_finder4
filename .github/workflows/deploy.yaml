@@ -102,23 +102,22 @@ jobs:
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
 
-    - name: Upload to S3
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: seunbucket101
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v22
+    - name: Deploy to AWS Elastic Beanstalk
+      uses: Amraneze/aws-beanstalk-deploy@master
       with:
+        region: AWS_REGION
+        environment_name: class-env
+        application_name: books_finder4
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: books_finder4
-        environment_name: class-env
-        version_label: app-0bfa-240703_212052765451
-        region: us-east-1
-    
-    
+        s3_bucket_name: elasticbeanstalk-us-east-1-675732258064
+        s3_file_path: arn:aws:s3:::elasticbeanstalk-us-east-1-675732258064/books_finder4/app-0bfa-240703_212052765451.zip
+        ebs_version_label: app-787e-240703_204843713461
+        ebs_description: ELASTIC_BEANSTALK_DESCRIPTION
+        ebs_wait_for_env_to_be_green: true
+        updated_version_url: class-env.eba-cequt5fh.us-east-1.elasticbeanstalk.com
+        expected_version: app-0bfa-240703_212052765451
+        use_same_version: true
+        # enable_debug: ${{ secrets.ENABLE_AWS_BS_DEPLOY_DEBUG }}
+        
