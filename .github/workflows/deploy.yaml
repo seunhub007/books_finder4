@@ -93,7 +93,7 @@ jobs:
         aws iam attach-role-policy --role-name EBSrole1 --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy1
         # aws iam attach-role-policy --role-name EBSrole1 --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
     - name: wait for policy attachment
-      run: sleep 10
+      run: sleep 6
           
 
     - name: Checkout source code
