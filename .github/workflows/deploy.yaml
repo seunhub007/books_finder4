@@ -36,7 +36,7 @@ jobs:
         aws iam create-role --role-name EBSrole1 --assume-role-policy-document file://ebsrole.json
       
     - name: wait for role creation
-      run: sleep 6 
+      run: sleep 5 
 
     - name: Create ebspolicy.json file
       run: |
@@ -111,3 +111,7 @@ jobs:
         environment_name: class-env
         version_label: app-d2e5-240702_152828665227
         region: us-east-1
+    
+    - name: Check deployment status
+      run: |
+        aws elasticbeanstalk describe-environment-health --environment-name class-env --attribute-names All        
