@@ -93,7 +93,7 @@ jobs:
         aws iam attach-role-policy --role-name EBSrole1 --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy1
         # aws iam attach-role-policy --role-name EBSrole1 --policy-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ebspolicy2
     - name: wait for policy attachment
-      run: sleep 6
+      run: sleep 5
           
 
     - name: Checkout source code
@@ -113,7 +113,7 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         s3_bucket_name: elasticbeanstalk-us-east-1-675732258064
         s3_file_path: s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-0bfa-240703_212052765451.zip
-        ebs_version_label: app-787e-240703_204843713461
+        ebs_version_label: app-0bfa-240703_212052765451
         ebs_description: ELASTIC_BEANSTALK_DESCRIPTION
         ebs_wait_for_env_to_be_green: true
         updated_version_url: class-env.eba-cequt5fh.us-east-1.elasticbeanstalk.com
