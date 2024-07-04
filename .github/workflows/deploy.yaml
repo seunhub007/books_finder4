@@ -61,7 +61,9 @@ jobs:
                 "autoscaling:DescribeAutoScalingInstances",
                 "autoscaling:DescribeScalingActivities",
                 "autoscaling:DescribeNotificationConfigurations",
-                "sns:Publish"
+                "sns:Publish",
+                "s3:GetObject",
+                "s3:PutObject"
               ],
               "Resource": "*"
             },
