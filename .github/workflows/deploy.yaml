@@ -112,12 +112,12 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         s3_bucket_name: elasticbeanstalk-us-east-1-675732258064
-        s3_file_path: s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-0bfa-240703_212052765451.zip
-        ebs_version_label: app-0bfa-240703_212052765451
+        s3_file_path: s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-d29e-240704_141424572694.zip
+        ebs_version_label: app-d29e-240704_141424572694
         ebs_description: Deployment for books_finder4
         ebs_wait_for_env_to_be_green: true
         updated_version_url: class-env.eba-cequt5fh.us-east-1.elasticbeanstalk.com
-        expected_version: app-0bfa-240703_212052765451
+        expected_version: app-d29e-240704_141424572694
         use_same_version: true
         enable_debug: ${{ secrets.ENABLE_AWS_BS_DEPLOY_DEBUG }}
         
