@@ -63,6 +63,9 @@ jobs:
                 "autoscaling:DescribeNotificationConfigurations",
                 "sns:Publish",
                 "s3:CreateBucket",
+                "s3:GetBucketLocation",
+                "s3:GetObjectAcl",
+                "s3:ListObjects",
                 "s3:GetObject",
                 "s3:PutObject"
               ],
@@ -112,6 +115,7 @@ jobs:
         AWS_REGION: us-east-1
       run: |
         aws s3 cp deploy.zip s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-d29e-240704_141424572694.zip
+        aws s3 ls s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/
 
     - name: Deploy to AWS Elastic Beanstalk
       uses: Amraneze/aws-beanstalk-deploy@master
