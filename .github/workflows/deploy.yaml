@@ -114,7 +114,7 @@ jobs:
         s3_bucket_name: elasticbeanstalk-us-east-1-675732258064
         s3_file_path: s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-0bfa-240703_212052765451.zip
         ebs_version_label: app-0bfa-240703_212052765451
-        ebs_description: ELASTIC_BEANSTALK_DESCRIPTION
+        ebs_description: Deployment for books_finder4
         ebs_wait_for_env_to_be_green: true
         updated_version_url: class-env.eba-cequt5fh.us-east-1.elasticbeanstalk.com
         expected_version: app-0bfa-240703_212052765451
