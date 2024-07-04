@@ -85,7 +85,7 @@ jobs:
         # aws iam create-policy --policy-name ebspolicy2 --policy-document file://ebs2policy.json
   
     - name: wait for policy creation
-      run: sleep 5
+      run: sleep 4
         
   
     - name: Attach policy to role
