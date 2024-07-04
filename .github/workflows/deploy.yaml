@@ -62,6 +62,7 @@ jobs:
                 "autoscaling:DescribeScalingActivities",
                 "autoscaling:DescribeNotificationConfigurations",
                 "sns:Publish",
+                "s3:CreateBucket",
                 "s3:GetObject",
                 "s3:PutObject"
               ],
@@ -110,7 +111,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-1
       run: |
-        aws s3 cp deploy.zip s3://elasticbeanstalk-${{ secrets.AWS_REGION }}-675732258064/books_finder4/app-d29e-240704_141424572694.zip
+        aws s3 cp deploy.zip s3://elasticbeanstalk-us-east-1-675732258064/books_finder4/app-d29e-240704_141424572694.zip
 
     - name: Deploy to AWS Elastic Beanstalk
       uses: Amraneze/aws-beanstalk-deploy@master
