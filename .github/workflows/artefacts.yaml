@@ -15,7 +15,7 @@ jobs:
     
     - name: Generate random number
       id: vars
-      run: echo "RANDOM_NUMBER=$(shuf -i 1000-9999 -n 1)" >> $GITHUB_ENV
+      run: echo "RANDOM_NUMBER=$(shuf -i 150-200 -n 1)" >> $GITHUB_ENV
 
 
     - name: Zip files
