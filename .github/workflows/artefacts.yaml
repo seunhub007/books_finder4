@@ -21,7 +21,7 @@ jobs:
       with:
         name: my-files-${{ env.RANDOM_NUMBER }}
         path: my-files-${{ env.RANDOM_NUMBER }}.zip
-        retention-days: 5
+        retention-days: 4
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
