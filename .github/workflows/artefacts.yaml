@@ -12,9 +12,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    
+    - name: Generate random number
+      id: vars
+      run: echo "RANDOM_NUMBER=$(shuf -i 1000-9999 -n 1)" >> $GITHUB_ENV
+
 
     - name: Zip files
-      run: zip -r my-files.zip . -x "*.git*"
+      run: zip -r my-files-${{ env.RANDOM_NUMBER }}.zip . -x "*.git*"
 
     - name: Upload ZIP file as artifact
       uses: actions/upload-artifact@v4
